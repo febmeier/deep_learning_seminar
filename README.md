@@ -26,11 +26,16 @@ logs/
 
 Next you will need to download the data from
 https://www.kaggle.com/c/invasive-species-monitoring/data
-or via the command
+or via the commands
+
 wget https://www.kaggle.com/c/invasive-species-monitoring/download/test.7z
+
 wget https://www.kaggle.com/c/invasive-species-monitoring/download/train.7z
+
 wget https://www.kaggle.com/c/invasive-species-monitoring/download/train_labels.csv.zip
+
 wget https://www.kaggle.com/c/invasive-species-monitoring/download/sample_submission.csv.zip
+
 and unpack all of them into the data directory.
 
 The selfbuilt neural network from groundup.py can now immediately be used by changing into the src directory and running the command
