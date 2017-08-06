@@ -9,7 +9,7 @@ from keras import applications
 from keras.preprocessing.image import ImageDataGenerator
 from keras import optimizers
 from keras.models import Sequential,Model
-from keras.layers import Dropout, Flatten, Dense
+from keras.layers import Dropout, Dense
 from keras.callbacks import EarlyStopping, TensorBoard
 from datetime import datetime
 from tqdm import tqdm

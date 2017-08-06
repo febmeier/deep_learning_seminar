@@ -9,7 +9,7 @@ from keras import applications
 from keras.preprocessing.image import ImageDataGenerator
 from keras import optimizers
 from keras.models import Sequential,Model,load_model
-from keras.layers import Dropout, Flatten, Dense
+from keras.layers import Dropout, Dense
 from keras.callbacks import EarlyStopping, TensorBoard
 from datetime import datetime
 from tqdm import tqdm
@@ -18,7 +18,7 @@ import invasive
 
 def predict_features(path_to_model):
     model = load_model(path_to_model)
-    img_width =400 
+    img_width =400
     img_height=300
     data = []
     for i in xrange(2295):
@@ -35,11 +35,11 @@ def make_model():
     return model
 
 def train_model(model):
-    #vgg_path = '../models/vgg16_finetuned.h5'    
+    #vgg_path = '../models/vgg16_finetuned.h5'
     #groundup_path = '../models/groundup.h5'
-    #feature_vgg = predict_features(vgg_path)    
+    #feature_vgg = predict_features(vgg_path)
     #np.save(open('../features/vgg16_total.npy', 'w'), feature_vgg)
-    #feature_groundup = predict_features(groundup_path)    
+    #feature_groundup = predict_features(groundup_path)
     #np.save(open('../features/groundup_total.npy', 'w'), feature_groundup)
     feature_vgg = np.load('../features/vgg16_total.npy')
     feature_groundup = np.load('../features/groundup_total.npy')
@@ -57,7 +57,7 @@ def train_model(model):
         verbose = 1,
         validation_data=(test_data, test_labels))
     return model
-        
+
 model = make_model()
 model = train_model(model)
 model.save('../models/combination.h5')

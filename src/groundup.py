@@ -10,7 +10,7 @@ from keras import applications
 from keras.preprocessing.image import ImageDataGenerator
 from keras import optimizers
 from keras.models import Sequential,Model
-from keras.layers import Dropout, Flatten, Dense
+from keras.layers import Dropout, GlobalAveragePooling2D, Dense
 from keras.callbacks import EarlyStopping, TensorBoard
 from keras.layers import Conv2D, MaxPooling2D
 from tqdm import tqdm
@@ -37,7 +37,7 @@ def build_nn(weights_path,img_width,img_height):
         model.add(MaxPooling2D(pool_size=(2,2)))
         model.add(Conv2D(128, (3,3), activation = 'relu'))
         model.add(MaxPooling2D(pool_size=(2,2)))
-        model.add(Flatten())
+        model.add(GlobalAveragePooling2D())
         model.add(Dense(1024, activation = 'relu'))
         model.add(Dropout(0.6))
         model.add(Dense(512, activation = 'relu'))
@@ -49,7 +49,7 @@ def build_nn(weights_path,img_width,img_height):
                 optimizer=optimizers.Adam(),
                 metrics=['accuracy'])
         return model
-   
+
 
 model = build_nn(weights_path,img_width,img_height)
 model = invasive.train_model(model, weights_path,img_width,img_height)

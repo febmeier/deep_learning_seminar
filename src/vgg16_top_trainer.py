@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 from keras.models import Sequential
-from keras.layers import Dropout, Flatten, Dense
+from keras.layers import Dropout, GlobalAveragePooling2D, Dense
 from keras.callbacks import EarlyStopping
 from sklearn import model_selection
 from keras import optimizers
@@ -38,7 +38,7 @@ print("train_labels shape: ",train_labels.shape)
 ################Top_model bauen###########################
 
 model = Sequential()
-model.add(Flatten(input_shape=train_data.shape[1:],name = 'Flatten_layer'))
+model.add(GlobalAveragePooling2D(input_shape=train_data.shape[1:],name = 'GlobalAveragePooling2D_layer'))
 model.add(Dense(256, activation = 'relu', name = 'Dense_1'))
 model.add(Dropout(0.5))
 model.add(Dense(1,activation = 'sigmoid', name = 'Classifier_layer'))
