@@ -64,3 +64,18 @@ https://www.kaggle.com/finlay/naive-bagging-cnn-pb0-985
 and
 
 https://www.kaggle.com/fujisan/use-keras-pre-trained-vgg16-acc-98
+
+
+
+Update: Retrain models included - Not included into predicter yet
+Update: GlobalAveragePooling2D added instead of Flatten - Untested
+Update:
+Todo: finetune resnet50,//
+implement inceptionV3 etc.//
+update predicter//
+Testing//
+Make code more accessible//
+Transfer onto classifiers//
+Make Code more general //
+include setup shell command or python script//
+Make Code immediately applicable to all Image classification tasks through input parameters maybe setup.py maybe other ways
