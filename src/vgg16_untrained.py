@@ -27,7 +27,6 @@ img_width = 400
 
 
 def make_model(weights_path,img_height,img_width):
-    top_weights_path = "../weights/vgg16_top_weights.h5"
     vgg16 = applications.VGG16(
             include_top = False,
             weights = None,

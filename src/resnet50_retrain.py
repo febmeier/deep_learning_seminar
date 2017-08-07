@@ -27,7 +27,6 @@ img_width = 400
 
 
 def make_model(weights_path,img_height,img_width):
-    top_weights_path = "../weights/resnet50_top_weights.h5"
     resnet50 = applications.ResNet50(
             include_top = False,
             weights = 'imagenet',
