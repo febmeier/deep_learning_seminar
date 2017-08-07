@@ -15,18 +15,23 @@ from datetime import datetime
 from tqdm import tqdm
 import cv2
 import invasive
+import os.path
 
-def predict_features(path_to_model):
-    model = load_model(path_to_model)
-    img_width =400
-    img_height=300
-    data = []
-    for i in xrange(2295):
-            data.append(invasive.read_img('../data/train/' + str(i+1) +'.jpg',img_width,img_height))
-    data = np.array(data, np.float32)/255
-    predictions = model.predict(data, batch_size = 1,
-                    verbose = 1)
-    return predictions
+def predict_features(path_to_model, name):
+    if os.path.isfile('../features/'+name+'.npy'):
+        return np.load('../features/'+name+'.npy')
+    else:
+        model = load_model(path_to_model)
+        img_width =400
+        img_height=300
+        data = []
+        for i in xrange(2295):
+                data.append(invasive.read_img('../data/train/' + str(i+1) +'.jpg',img_width,img_height))
+        data = np.array(data, np.float32)/255
+        predictions = model.predict(data, batch_size = 1,
+                        verbose = 1)
+        np.save(open('../features/'+name+'.npy', 'w'))
+        return predictions
 
 def make_model():
     model = Sequential()
@@ -35,14 +40,23 @@ def make_model():
     return model
 
 def train_model(model):
-    #vgg_path = '../models/vgg16_finetuned.h5'
-    #groundup_path = '../models/groundup.h5'
-    #feature_vgg = predict_features(vgg_path)
-    #np.save(open('../features/vgg16_total.npy', 'w'), feature_vgg)
-    #feature_groundup = predict_features(groundup_path)
-    #np.save(open('../features/groundup_total.npy', 'w'), feature_groundup)
-    feature_vgg = np.load('../features/vgg16_total.npy')
-    feature_groundup = np.load('../features/groundup_total.npy')
+    vgg_path = '../models/vgg16_finetuned.h5'
+    groundup_path = '../models/groundup.h5'
+    feature_vgg = predict_features(vgg_path,"vgg_total")
+    feature_groundup = predict_features(vgg_path,"groundup_total")
+    data = np.column_stack((feature_vgg,feature_groundup))
+    feature = predict_features("../models/resnet50_retrained.h5","resnet50_retrained")
+    data = np.column_stack((data,feature))
+    feature = predict_features("../models/resnet50_untraineded.h5","resnet50_untrained")
+    data = np.column_stack((data,feature))
+    feature = predict_features("../models/vgg16_retrained.h5","vgg16_retrained")
+    data = np.column_stack((data,feature))
+    feature = predict_features("../models/vgg16_untraineded.h5","vgg16_untrained")
+    data = np.column_stack((data,feature))
+    feature = predict_features("../models/inceptionv3_retrained.h5","inceptionv3_retrained")
+    data = np.column_stack((data,feature))
+    feature = predict_features("../models/inceptionv3_untraineded.h5","inceptionv3_untrained")
+    data = np.column_stack((data,feature))
     train_labels = pd.read_csv('../data/train_labels.csv')
     labels = np.array(train_labels.invasive.values[0:2295])
     split_at = 2295/5

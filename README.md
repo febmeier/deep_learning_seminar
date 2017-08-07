@@ -68,19 +68,24 @@ and
 https://www.kaggle.com/fujisan/use-keras-pre-trained-vgg16-acc-98
 
 
-### Todo und Updates
-Update: Retrain models included - Not included into predicter yet
-Update: GlobalAveragePooling2D added instead of Flatten - Untested
-Update:
-Todo:
+
+###Update:
 ```
-finetune resnet50
-implement inceptionV3 etc.
+Retrain models included - Not included into predicter yet
+GlobalAveragePooling2D added instead of Flatten - Untested
+Added inceptionV3 + train untrained models
+predicter + combination updated to include retrain + untrained for resnet,vgg,inception in 1  
+
+```
+###Todo:
+```
+finetune resnet50, inceptionV3
 update predicter
-Testing
+better use of optimizers by using callbacks reduce LR on plateau etc. optimize use of LR Siehe: https://www.kaggle.com/algila/inception-v3-and-k-fold-in-python-0-98996
+Testing - run all retrain/untrained and write down accuracies
+Achieve 98%++ accuracy - should be easily possible
 Make code more accessible
-Transfer onto classifiers
-Make Code more general
 include setup shell command or python script
+Transfer onto other classification tasks
 Make Code immediately applicable to all Image classification tasks through input parameters maybe setup.py maybe other ways
 ```
