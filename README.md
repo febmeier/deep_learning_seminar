@@ -56,7 +56,7 @@ python vgg16_finetuner.py
 ```
 This will create validation accuracies of up to 97 percent and reach a Kaggle score of over 0.95.
 
-The code uses the vgg16 model (https://arxiv.org/abs/1409.1556) and resnet50 model (https://arxiv.org/abs/1512.03385)(currently not properly implemented in our code)
+The code uses the vgg16 model ( https://arxiv.org/abs/1409.1556 ) and resnet50 model ( https://arxiv.org/abs/1512.03385 )(currently not properly implemented in our code)
 Most of the code is selfwritten, but heavily inspired by the Keras Blog.
 (https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html)
 Some code snippits such as the read_img function were copied from kaggle kernels such as
@@ -74,7 +74,7 @@ Update: GlobalAveragePooling2D added instead of Flatten - Untested
 Update:
 Todo:
 ```
-finetune resnet50,x
+finetune resnet50
 implement inceptionV3 etc.
 update predicter
 Testing
