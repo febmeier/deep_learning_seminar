@@ -30,13 +30,13 @@ def make_model(weights_path,img_height,img_width):
     top_weights_path = "../weights/resnet50_top_weights.h5"
     resnet50 = applications.ResNet50(
             include_top = False,
-            weights = None,
+            weights = 'imagenet',
             input_shape = (img_width, img_height, 3))
 
     top_model = Sequential()
     top_model.add(GlobalAveragePooling2D(input_shape=resnet50.output_shape[1:],name = 'GlobalAveragePooling2D_layer'))
     top_model.add(Dense(256, activation = 'relu', name = 'Dense_1'))
-    top_model.add(Dropout(0.5))
+    top_model.add(Dropout(0.75))
     top_model.add(Dense(1,activation = 'sigmoid', name = 'Classifier_layer'))
     model = Model(inputs=resnet50.input, outputs=top_model(resnet50.output))
     #model.load_weights(weights_path)

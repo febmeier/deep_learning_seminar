@@ -17,16 +17,12 @@ from tqdm import tqdm
 import cv2
 import invasive
 ########## Globale Variablen etc. ###################
-
 weights_path = "../weights/groundup_weights.h5"
 model_path = '../models/groundup.h5'
 img_height = 300
 img_width = 400
-
-
-
-####################################################################################################
-
+######################### Neurales Netzwerk definieren ###############################################
+#Angelehnt an https://www.kaggle.com/finlay/naive-bagging-cnn-pb0-985
 def build_nn(weights_path,img_width,img_height):
         model = Sequential()
         model.add(Conv2D(16, (3,3), activation = 'relu', input_shape=(img_width,img_height,3)))
@@ -44,7 +40,7 @@ def build_nn(weights_path,img_width,img_height):
         model.add(Dropout(0.6))
         model.add(Dense(1, activation = 'sigmoid'))
         model.load_weights(weights_path)
-        optim = optimizers.SGD(lr = 0.0001, decay = 1e-6, momentum = 0.9, nesterov = True)
+        #optim = optimizers.SGD(lr = 0.0001, decay = 1e-6, momentum = 0.9, nesterov = True)
         model.compile(loss = 'binary_crossentropy',
                 optimizer=optimizers.Adam(),
                 metrics=['accuracy'])
