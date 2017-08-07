@@ -19,8 +19,8 @@ import invasive
 ########## Globale Variablen etc. ###################
 
 
-weights_path = "../weights/resnet50_retrain.h5"
-model_path = "../models/resnet50_retrained.h5"
+weights_path = "../weights/resnet50_untrained.h5"
+model_path = "../models/resnet50_untraineded.h5"
 img_height = 300
 img_width = 400
 
@@ -51,4 +51,4 @@ model = invasive.train_model(model,weights_path,img_width,img_height)
 model.save_weights(weights_path)
 model.save(model_path)
 predictions = invasive.makepredictions(model)
-np.save(open('../predictions/resnet50_retrain_predictions.npy', 'w'), predictions)
+np.save(open('../predictions/resnet50_untrained_predictions.npy', 'w'), predictions)
