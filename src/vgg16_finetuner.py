@@ -41,7 +41,8 @@ def make_model(weights_path,img_height,img_width):
 
     top_model.load_weights(top_weights_path)
     model = Model(inputs=vgg16.input, outputs=top_model(vgg16.output))
-    #model.load_weights(weights_path)
+    if os.path.isfile(weights_path):
+        model.load_weights(weights_path)
     for layer in model.layers[:15]:
         layer.trainable = False
 

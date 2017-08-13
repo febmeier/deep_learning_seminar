@@ -44,7 +44,8 @@ model.add(Dropout(0.5))
 model.add(Dense(1,activation = 'sigmoid', name = 'Classifier_layer'))
 
 ############TODO Optimizer konfigurieren#####################
-model.load_weights(weights_path)
+if os.path.isfile(weights_path):
+    model.load_weights(weights_path)
 model.compile(optimizer=optimizers.Adam(), loss = 'binary_crossentropy', metrics = ['accuracy'])
 early_stopping = EarlyStopping(monitor="val_loss", patience = 3, verbose = 1, mode= "auto")
 model.fit(train_data, train_labels,

@@ -39,7 +39,8 @@ def build_nn(weights_path,img_width,img_height):
         model.add(Dense(512, activation = 'relu'))
         model.add(Dropout(0.6))
         model.add(Dense(1, activation = 'sigmoid'))
-        model.load_weights(weights_path)
+        if os.path.isfile(weights_path):
+            model.load_weights(weights_path)
         #optim = optimizers.SGD(lr = 0.0001, decay = 1e-6, momentum = 0.9, nesterov = True)
         model.compile(loss = 'binary_crossentropy',
                 optimizer=optimizers.Adam(),

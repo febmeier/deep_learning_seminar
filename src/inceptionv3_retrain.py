@@ -38,7 +38,8 @@ def make_model(weights_path,img_height,img_width):
     top_model.add(Dropout(0.75))
     top_model.add(Dense(1,activation = 'sigmoid', name = 'Classifier_layer'))
     model = Model(inputs=inceptionv3.input, outputs=top_model(inceptionv3.output))
-    #model.load_weights(weights_path)
+    if os.path.isfile(weights_path):
+        model.load_weights(weights_path)
     model.compile(loss = 'binary_crossentropy',
                     optimizer=optimizers.Adam(),
                     metrics=['accuracy'])
