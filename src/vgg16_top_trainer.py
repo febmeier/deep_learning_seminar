@@ -4,6 +4,7 @@ import locale
 locale.setlocale(locale.LC_ALL, '')
 import numpy as np
 import pandas as pd
+import os.path
 
 from keras.models import Sequential
 from keras.layers import Dropout, GlobalAveragePooling2D, Dense

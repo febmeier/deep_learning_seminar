@@ -15,6 +15,7 @@ from datetime import datetime
 from tqdm import tqdm
 import cv2
 import invasive
+import os.path
 
 ########## Globale Variablen etc. ###################
 

@@ -16,6 +16,8 @@ from keras.layers import Conv2D, MaxPooling2D
 from tqdm import tqdm
 import cv2
 import invasive
+import os.path
+
 ########## Globale Variablen etc. ###################
 weights_path = "../weights/groundup_weights.h5"
 model_path = '../models/groundup.h5'
