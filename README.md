@@ -76,10 +76,13 @@ GlobalAveragePooling2D added instead of Flatten - Untested
 Added inceptionV3 + train untrained models
 predicter + combination updated to include retrain + untrained for resnet,vgg,inception in 1  
 
+All retrain  and untrained except inceptionv3 retrain did perform very poorly (<70%)
+Changed predicter to predict from groundup/vggfinetune/inceptionv3retrain
+
 ```
 ###Todo:
 ```
-finetune resnet50, inceptionV3
+finetune resnet50
 update predicter
 better use of optimizers by using callbacks reduce LR on plateau etc. optimize use of LR Siehe: https://www.kaggle.com/algila/inception-v3-and-k-fold-in-python-0-98996
 Testing - run all retrain/untrained and write down accuracies

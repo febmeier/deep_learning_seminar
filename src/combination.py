@@ -35,7 +35,7 @@ def predict_features(path_to_model, name):
 
 def make_model():
     model = Sequential()
-    model.add(Dense(1,input_shape = (2,), activation = 'sigmoid'))
+    model.add(Dense(1,input_shape = (3,), activation = 'sigmoid'))
     model.compile(optimizer = optimizers.Adam(), loss = 'binary_crossentropy', metrics = ['accuracy'])
     return model
 
@@ -45,17 +45,7 @@ def train_model(model):
     feature_vgg = predict_features(vgg_path,"vgg_total")
     feature_groundup = predict_features(vgg_path,"groundup_total")
     data = np.column_stack((feature_vgg,feature_groundup))
-    feature = predict_features("../models/resnet50_retrained.h5","resnet50_retrained")
-    data = np.column_stack((data,feature))
-    feature = predict_features("../models/resnet50_untraineded.h5","resnet50_untrained")
-    data = np.column_stack((data,feature))
-    feature = predict_features("../models/vgg16_retrained.h5","vgg16_retrained")
-    data = np.column_stack((data,feature))
-    feature = predict_features("../models/vgg16_untraineded.h5","vgg16_untrained")
-    data = np.column_stack((data,feature))
     feature = predict_features("../models/inceptionv3_retrained.h5","inceptionv3_retrained")
-    data = np.column_stack((data,feature))
-    feature = predict_features("../models/inceptionv3_untraineded.h5","inceptionv3_untrained")
     data = np.column_stack((data,feature))
     train_labels = pd.read_csv('../data/train_labels.csv')
     labels = np.array(train_labels.invasive.values[0:2295])
