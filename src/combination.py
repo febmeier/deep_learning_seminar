@@ -19,7 +19,8 @@ import os.path
 
 def predict_features(path_to_model, name):
     if os.path.isfile('../features/'+name+'.npy'):
-        return np.load('../features/'+name+'.npy')
+        temp = np.load('../features/'+name+'.npy')
+        return temp
     else:
         model = load_model(path_to_model)
         img_width =400
@@ -30,7 +31,7 @@ def predict_features(path_to_model, name):
         data = np.array(data, np.float32)/255
         predictions = model.predict(data, batch_size = 1,
                         verbose = 1)
-        np.save(open('../features/'+name+'.npy', 'w'))
+        np.save('../features/'+name+'.npy', predictions)
         return predictions
 
 def make_model():
@@ -44,15 +45,17 @@ def train_model(model):
     groundup_path = '../models/groundup.h5'
     feature_vgg = predict_features(vgg_path,"vgg_total")
     feature_groundup = predict_features(vgg_path,"groundup_total")
-    data = np.column_stack((feature_vgg,feature_groundup))
+    data = np.hstack((feature_vgg,feature_groundup))
+    print(data.shape)
     feature = predict_features("../models/inceptionv3_retrained.h5","inceptionv3_retrained")
-    data = np.column_stack((data,feature))
+    data = np.hstack((data,feature))
     train_labels = pd.read_csv('../data/train_labels.csv')
     labels = np.array(train_labels.invasive.values[0:2295])
     split_at = 2295/5
     train_labels = labels[split_at:]
     test_labels = labels[:split_at]
-    data = np.column_stack((feature_vgg,feature_groundup))
+#    data = np.column_stack((feature_vgg,feature_groundup))
+    print(data.shape)
     train_data = data[split_at:]
     test_data = data[:split_at]
     model.fit(train_data, train_labels,

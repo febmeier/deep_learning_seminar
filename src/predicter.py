@@ -29,6 +29,7 @@ def predict_from_all():
         predictions_groundup = np.load(open('../predictions/groundup_prediction_array.npy'))
         data = np.column_stack((predictions_vgg,predictions_groundup))
         prediction = np.load(open("../predictions/inceptionv3_retrain_predictions.npy"))
+        data = np.hstack((data,prediction))
         model = load_model('../models/combination.h5')
         predictions = model.predict(data, batch_size = 1,verbose = 1)
         return predictions
